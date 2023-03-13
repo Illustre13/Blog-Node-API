@@ -3,11 +3,39 @@ const  mongoose = require('mongoose');
 const app = express()
 const Blog = require('./models/blogModel')
 const User = require('./models/userModel')
+
+const swaggerUI = require("swagger-ui-express")
+const swaggerJsDoc = require("swagger-jsdoc")
+
 app.use(express.json())
 
 //Updating the blog content using  the Form we have to use express urlencoded
 app.use(express.urlencoded({extended: false}))
 
+//Swagger Options 
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+
+            title: "My Blog API",
+            verison: "1.0.0",
+            description: "My Blog CRUD operation API for the blogs and users"
+        }, 
+        servers: [
+            {
+                url: "http://localhost:4455"
+            },
+        ],  
+              
+        
+    },
+    apis: ["./routes/*.js"]
+}
+
+const specs = swaggerJsDoc(options)
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 
 //Adding our Routes
 app.get('/', (req, res) => {
@@ -151,6 +179,39 @@ app.delete('/user_data/:id', async(req, res) => {
         res.status(500).json({message: error.message})
     }
 })
+
+
+/**
+ * @swagger
+ * components: 
+ *      schemas:
+ *          Blog:
+ *              type: object
+ *              requires;
+ *                  -title
+ *                  -category
+ *                  -image
+ *                  -content
+ *               properties:
+ *                 title:
+ *                      type: String
+ *                       desciption: Blog title
+ *                  category:
+ *                      type: String
+ *                      description: Category of the blog post   
+ *                  image:
+ *                      type: String
+ *                       desciption: Image related to the blog post
+ *                  content:
+ *                      type: String
+ *                       desciption: Insert the blog content
+ *                  examples:
+ *                      title: Home Alone
+ *                      category: News
+ *                      image: image
+ *                      content: Home AloneHome AloneHome AloneHome AloneHome Alone
+ *                  
+ */
 
 /* End of the User route section*/
 
