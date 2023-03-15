@@ -9,6 +9,7 @@ const {validateSignup} = require('./joiValidator');
 const {validateSignin} = require('./joiValidator');
 const connectDb = require("./db");
 const bcrypt = require('bcrypt');
+const {signAccessToken} = require('./routes/jwt_file')
 
 // Define the JWT secret
 const jwtSecret = 'my-secret';
@@ -105,6 +106,7 @@ app.delete('/delete_blog/:id', async(req, res) => {
 /* Starting of the User Route Section */
 //Fetching User data from the database
 app.get('/user', async(req, res) =>{
+    
     try{
         const user = await User.find({});
         res.status(200).json(user)
@@ -192,9 +194,13 @@ app.post('/signup', async (req, res) => {
     rePassword: hashedrePassword,
     role: req.body.role,
   });
-  await newUser.save();
 
-  res.json({ message: 'USer Signed UP Successfully!' });
+await newUser.save();
+
+
+ // res.json({ message: 'USer Signed UP Successfully!' });
+
+
 });
 
 //End of Signup 
@@ -223,7 +229,9 @@ app.post('/signin', async (req, res) => {
         res.status(200).json({message: 'Welcome Admin, Successfully Signed In!'});
         //res.json({ message: 'Welcome Admin, Successfully Signed In!' });
     }else{
-        res.status(200).json({message: 'Welcome, Signed In Successfully!'});
+        const accessToken = await signAccessToken(user.email)
+      //  res.status(200).json({message: 'Welcome, Signed In Successfully!'});
+        res.send(accessToken)
        // res.json({ message: 'Welcome, Signed In Successfully!' });
     }
 
