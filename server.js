@@ -3,6 +3,15 @@ const  mongoose = require('mongoose');
 const app = express()
 const Blog = require('./models/blogModel')
 const User = require('./models/userModel')
+const jwt = require('jsonwebtoken');
+const Joi = require('joi');
+const {validateSignup} = require('./joiValidator');
+const {validateSignin} = require('./joiValidator');
+
+// Define the JWT secret
+const jwtSecret = 'my-secret';
+
+
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
@@ -46,7 +55,6 @@ app.get('/blog_data/:id', async(req, res) =>{
         res.status(500).json({message: error.message})
     }
 })
-
 //Saving blog data into the database
 app.post('/blog_data', async(req, res) => {
     //console.log(req.body);
@@ -59,6 +67,63 @@ app.post('/blog_data', async(req, res) => {
             res.status(500).json({message: error.message})
         }
 })
+//Signup API
+// Define the sign up API
+app.post('/signup', async (req, res) => {
+    // Validate the request body
+    const { error } = validateSignup(req.body);
+    if (error) {
+        console.log(error);
+      return res.status(400).json({ message: error.details[0].message });
+    }
+     // Check if the user already exists
+  const user_email = await User.findOne({ email: req.body.email });
+  if (user_email) {
+    return res.status(409).json({ message: 'User with this email already exists' });
+  }
+   // Create a new user
+   const newUser = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    role: req.body.role,
+  });
+  await newUser.save();
+
+  res.json({ message: 'USer Signed UP Successfully!' });
+});
+
+//End of Signup 
+// Define the sign in API
+app.post('/signin', async (req, res) => {
+    // Validate the request body
+    
+    const { error } = validateSignin(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+  
+    // Check if the user exists
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+  
+    // Check if the password is correct
+    if (user.password !== req.body.password) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+    if(user.role == "Admin"){
+        res.status(200).json({message: 'Welcome Admin, Successfully Signed In!'});
+        //res.json({ message: 'Welcome Admin, Successfully Signed In!' });
+    }else{
+        res.status(200).json({message: 'Welcome, Signed In Successfully!'});
+       // res.json({ message: 'Welcome, Signed In Successfully!' });
+    }
+
+})
+    //End of Signin Section
+
 
 //Updating a blog in database Using JSON
 app.put('/blog_data/:id', async(req, res) =>{
@@ -75,6 +140,7 @@ app.put('/blog_data/:id', async(req, res) =>{
         res.status(500).json({message: error.message})
     }
 })
+
 
 //Deleting a blog with specified ID
 app.delete('/blog_data/:id', async(req, res) => {
