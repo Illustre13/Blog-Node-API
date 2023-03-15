@@ -9,7 +9,7 @@ const validator = (schema) => (payload) =>
         password: Joi.string()
           .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).min(8).max(16).required(),
         role: Joi.string(),
-  
+        rePassword: Joi.ref('password'),
         //repeat_password: Joi.ref('password'),
        // password: Joi.string().min(8).max(16).required(),
       });

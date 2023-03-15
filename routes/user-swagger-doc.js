@@ -22,6 +22,9 @@
  *         password:
  *           type: string
  *           description: The User password
+ *         re_password:
+ *           type: string
+ *           description: Confirm password
  *         role:
  *           type: string
  *           description: The Role of the User
@@ -54,7 +57,7 @@
 
 /**
  * @swagger
- * /user_data:
+ * /save_user:
  *   post:
  *     summary: Create a new user
  *     tags: [User]
@@ -79,7 +82,56 @@
 
 /**
  * @swagger
- * /user_data:
+ * /signup:
+ *   post:
+ *     summary: User Signup
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: Succesfully created a new User.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       500:
+ *         description: Signup Error
+ *
+ */
+
+
+/**
+ * @swagger
+ * /signin:
+ *   post:
+ *     summary: User Log In
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: User have Succesfully Signed in.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       500:
+ *         description: Login Error
+ *
+ */
+
+/**
+ * @swagger
+ * /user:
  *   get:
  *     summary: Get All Users from the database
  *     tags: [User]
@@ -97,7 +149,7 @@
 
 /**
  * @swagger
- * /user_data/{id}:
+ * /user/{id}:
  *   get:
  *     summary: Get User by ID specified from the database
  *     tags: [User]
@@ -124,7 +176,7 @@
 
 /**
  *  @swagger
- * /user_data/{id}:
+ * /update_user/{id}:
  *  put:
  *    summary: Update the user with the specified id
  *    tags: [User]
@@ -157,7 +209,7 @@
 
 /**
  *  @swagger
- * /user_data/{id}:
+ * /delete_user/{id}:
  *  delete:
  *    summary: Delete the user with the specified id
  *    tags: [User]

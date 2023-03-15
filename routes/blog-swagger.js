@@ -54,7 +54,7 @@
 
 /**
  * @swagger
- * /blog_data:
+ * /create_blog:
  *   post:
  *     summary: Create a new blog
  *     tags: [Blog]
@@ -79,7 +79,7 @@
 
 /**
  * @swagger
- * /blog_data:
+ * /blog:
  *   get:
  *     summary: Get All Blogs from the database
  *     tags: [Blog]
@@ -99,7 +99,7 @@
 
 /**
  * @swagger
- * /blog_data/{id}:
+ * /blog/{id}:
  *   get:
  *     summary: Get one Blog by ID specified from the database
  *     tags: [Blog]
@@ -127,7 +127,7 @@
 
 /**
  *  @swagger
- * /blog_data/{id}:
+ * /update_blog/{id}:
  *   put:
  *     summary: Update the blog with the specified id
  *     tags: [Blog]
@@ -160,7 +160,7 @@
 
 /**
  *  @swagger
- * /blog_data/{id}:
+ * /delete_blog/{id}:
  *   delete:
  *     summary: Delete the blog with the specified id
  *     tags: [Blog]
