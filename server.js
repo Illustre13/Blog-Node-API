@@ -10,7 +10,8 @@ const {validateSignin} = require('./joiValidator');
 const connectDb = require("./db");
 const bcrypt = require('bcrypt');
 const {signAccessToken} = require('./routes/jwt_file')
-
+const { verifyAccessToken } = require('./routes/jwt_file')
+const axios = require('axios');
 // Define the JWT secret
 const jwtSecret = 'my-secret';
 
@@ -74,6 +75,8 @@ app.post('/create_blog', async(req, res) => {
 //Updating a blog in database Using JSON
 app.put('/update_blog/:id', async(req, res) =>{
     try{
+       
+        
         const {id} = req.params;
         const blog = await Blog.findByIdAndUpdate(id, req.body);
         if(!blog){
@@ -141,7 +144,16 @@ app.post('/save_user', async(req, res) => {
 
 //Updating a user in database Using JSON
 app.put('/update_user/:id', async(req, res) =>{
+    
     try{
+        const authHeader = req.headers['authorization']
+        const token = authHeader && authHeader.split(' ')[1]
+        if (!token) return res.status(401).send({ error: 'Unauthorized, No Token Available' })
+        
+        const payload = await verifyAccessToken(token)
+        console.log(payload.role)
+        if (payload.role !== 'Admin') return res.status(401).send({ error: 'Unauthorized, You do not have Privilege to do this task' })
+
         const {id} = req.params;
         const user = await User.findByIdAndUpdate(id, req.body);
         if(!user){
@@ -225,15 +237,20 @@ app.post('/signin', async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
+    const accessToken = await signAccessToken(user.email, user.role)
     if(user.role == "Admin"){
-        res.status(200).json({message: 'Welcome Admin, Successfully Signed In!'});
+       // res.status(200).json({message: 'Welcome Admin, Successfully Signed In!'});
         //res.json({ message: 'Welcome Admin, Successfully Signed In!' });
+        res.send(accessToken)
+//        req.session['jwt_token'] = accessToken
     }else{
-        const accessToken = await signAccessToken(user.email)
+        
       //  res.status(200).json({message: 'Welcome, Signed In Successfully!'});
         res.send(accessToken)
+      //  req.session['jwt_token'] = accessToken
        // res.json({ message: 'Welcome, Signed In Successfully!' });
     }
+   
 
 })
     //End of Signin Section

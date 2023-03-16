@@ -47,6 +47,30 @@
  * 
  */
 
+//User Login SWagger description
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserLogin:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: The User email
+ *         password:
+ *           type: string
+ *           description: The User password
+ *       example:
+ *         email: illustre@gmail.com
+ *         password: illustre123
+ * 
+ */
+
 
 /**
  * @swagger
@@ -116,14 +140,14 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/UserLogin'
  *     responses:
  *       200:
  *         description: User have Succesfully Signed in.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/UserLogin'
  *       500:
  *         description: Login Error
  *
