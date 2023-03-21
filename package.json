@@ -24,10 +24,5 @@
     "mongoose": "^7.0.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
-    "babel-jest": "^29.5.0"
   }
 }

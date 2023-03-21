@@ -228,14 +228,14 @@ app.post('/signin', async (req, res) => {
     // Check if the user exists
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Email not found, Please Signup first!!' });
     }
   
     // Check if the password is correct
      // Compare the password with the hashed password using bcrypt
      const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Your password is not correct!!' });
     }
     const accessToken = await signAccessToken(user.email, user.role)
     if(user.role == "Admin"){
