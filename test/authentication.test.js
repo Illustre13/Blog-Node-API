@@ -5,7 +5,7 @@ const axios = require('axios');
 
 chai.use(chaiHttp);
 const expect = chai.expect;
-const baseUrl  = 'http://localhost:4455';
+const baseUrl  = 'https://ith-mybrand-backend.onrender.com/blog';
 describe('Testing Blog End Points', () => {
   it('should return a 200 status code for a valid request', (done) => {
     chai.request(baseUrl)
