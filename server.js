@@ -54,9 +54,9 @@ app.get('/', (req, res) => {
     - Blogs List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/blog/"> Here.</a><br>
     - Users List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/user/"> Here.</a><br>
     - Swagger Documentation : <a href="https://ith-mybrand-backend.onrender.com/api-docs/"> Here.</a><br>
-    - **************************************************************************************************************<br>
+    - *********************************************<br>
     - ** My Brand Frontend can be Accessed here : <a href="https://ith-mybrand.netlify.app/index.html"> Here.</a> **<br>
-    - **************************************************************************************************************<br>
+    - *********************************************<br>
     Thank you for using my API!<br>
   `;
   res.send(welcomeMessage);
