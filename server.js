@@ -14,8 +14,8 @@ const { verifyAccessToken } = require('./routes/jwt_file')
 const axios = require('axios');
 // Define the JWT secret
 const jwtSecret = 'my-secret';
-const cors = require("cors");
 
+const cors = require("cors");
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
@@ -45,7 +45,21 @@ app.use(cors());
 
 //Adding our Routes
 app.get('/', (req, res) => {
-    res.send('Hello There, This is my Blog Node API')
+    const welcomeMessage = `
+    Hello there!<br><br>
+
+    Welcome to my Blog API. Here are some links you might find useful:<br>
+    - Blog Path Test : <a href="https://ith-mybrand-backend.onrender.com/blogs/"> Here.</a><br>
+    - User Path Test : <a href="https://ith-mybrand-backend.onrender.com/users/"> Here.</a><br>
+    - Blogs List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/blog/"> Here.</a><br>
+    - Users List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/user/"> Here.</a><br>
+    - Swagger Documentation : <a href="https://ith-mybrand-backend.onrender.com/api-docs/"> Here.</a><br>
+    - *********************************************<br>
+    - ** My Brand Frontend can be Accessed here : <a href="https://ith-mybrand.netlify.app/index.html"> Here.</a> **<br>
+    - *********************************************<br>
+    Thank you for using my API!<br>
+  `;
+  res.send(welcomeMessage);
 })
 
 app.get('/blogs', (req, res) => {
@@ -286,7 +300,7 @@ const options = {
             verison: "1.0.0",
             description: "My Blog CRUD operation API for the blogs and users"
         }, 
-        servers: [
+        server: [
             {
                 url: "https://ith-mybrand-backend.onrender.com"
             },
