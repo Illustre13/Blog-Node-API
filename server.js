@@ -46,18 +46,18 @@ app.use(cors());
 //Adding our Routes
 app.get('/', (req, res) => {
     const welcomeMessage = `
-    Hello there!
+    Hello there!<br><br>
 
-    Welcome to my Blog API. Here are some links you might find useful:,
-    - Blog Path Test : <a href="https://ith-mybrand-backend.onrender.com/blogs/"> Here.</a>,
-    - User Path Test : <a href="https://ith-mybrand-backend.onrender.com/users/"> Here.</a>,   
-    - Blogs List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/blog/"> Here.</a>,
-    - Users List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/user/"> Here.</a>,
-    - Swagger Documentation : https://ith-mybrand-backend.onrender.com/api-docs/"> Here.</a>,
-    - **************************************************************************************************************,
-    - ** My Brand Frontend can be Accessed here : <a href="https://ith-mybrand.netlify.app/index.html"> Here.</a> **,
-    - **************************************************************************************************************,
-    Thank you for using my API!,
+    Welcome to my Blog API. Here are some links you might find useful:<br>
+    - Blog Path Test : <a href="https://ith-mybrand-backend.onrender.com/blogs/"> Here.</a><br>
+    - User Path Test : <a href="https://ith-mybrand-backend.onrender.com/users/"> Here.</a><br>
+    - Blogs List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/blog/"> Here.</a><br>
+    - Users List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/user/"> Here.</a><br>
+    - Swagger Documentation : <a href="https://ith-mybrand-backend.onrender.com/api-docs/"> Here.</a><br>
+    - **************************************************************************************************************<br>
+    - ** My Brand Frontend can be Accessed here : <a href="https://ith-mybrand.netlify.app/index.html"> Here.</a> **<br>
+    - **************************************************************************************************************<br>
+    Thank you for using my API!<br>
   `;
   res.send(welcomeMessage);
 })
