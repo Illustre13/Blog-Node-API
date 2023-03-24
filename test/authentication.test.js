@@ -5,7 +5,7 @@ const axios = require('axios');
 
 chai.use(chaiHttp);
 const expect = chai.expect;
-const baseUrl  = 'http://localhost:4455';
+const baseUrl  = 'https://ith-mybrand-backend.onrender.com/blog';
 describe('Testing Blog End Points', () => {
   it('should return a 200 status code for a valid request', (done) => {
     chai.request(baseUrl)
@@ -72,9 +72,9 @@ describe('Testing Blog End Points', () => {
        
    });
 
-   it('should return a 200 status code for deleting the user successfully', (done) => {
+   it('should return a 200 status code for deleting the blog successfully', (done) => {
     chai.request(baseUrl)
-      .delete('/delete_blog/640f42c76f08e7d7eb0e23d0')
+      .delete('/delete_blog/641985617eeef1998fa9055d')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -144,7 +144,7 @@ describe('Testing User End Points', () => {
 
        it('should return a 200 status code for updating the user successfully', async() => {
         const res = await chai.request(baseUrl)
-           .put('/update_user/6411d88d19097be67aef52d4')
+           .put('/update_user/6419b0dee3210c933aef293e')
            .send({
              username: 'testuserUpdatedQWERTY'
            });
@@ -155,7 +155,7 @@ describe('Testing User End Points', () => {
 
        it('should return a 200 status code for deleting the user successfully', (done) => {
         chai.request(baseUrl)
-          .delete('/delete_user/6411e00b248f1a1d0b87f357')
+          .delete('/delete_user/6419b1de2be834a659a0c948')
           .end((err, res) => {
             expect(res).to.have.status(200);
             done();

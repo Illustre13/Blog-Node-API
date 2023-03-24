@@ -15,7 +15,7 @@ const axios = require('axios');
 // Define the JWT secret
 const jwtSecret = 'my-secret';
 
-
+const cors = require("cors");
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
@@ -25,6 +25,23 @@ app.use(express.json())
 //Updating the blog content using  the Form we have to use express urlencoded
 app.use(express.urlencoded({extended: false}))
 
+//cors on server side
+
+//Adding our Routes
+//const header = new Headers({ "Access-Control-Allow-Origin": "*" });
+
+
+// Add Access Control Allow Origin headers
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https:");
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested-With, Content-Type, Accept"
+//     );
+//     next();
+//   });
+  
+app.use(cors());
 
 //Adding our Routes
 app.get('/', (req, res) => {
@@ -37,7 +54,9 @@ app.get('/', (req, res) => {
     - Blogs List in JSON format : https://ith-mybrand-backend.onrender.com/blog/
     - Users List in JSON format : https://ith-mybrand-backend.onrender.com/user/
     - Swagger Documentation : https://ith-mybrand-backend.onrender.com/api-docs/
-
+    - *****************************************************************************************
+    - ** My Brand Frontend can be Accessed here : https://ith-mybrand.netlify.app/index.html **
+    - *****************************************************************************************
     Thank you for using my API!
   `;
   res.send(welcomeMessage);
@@ -281,9 +300,9 @@ const options = {
             verison: "1.0.0",
             description: "My Blog CRUD operation API for the blogs and users"
         }, 
-        servers: [
+        server: [
             {
-                url: "http://localhost:4455"
+                url: "https://ith-mybrand-backend.onrender.com"
             },
         ],  
               
