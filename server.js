@@ -48,16 +48,16 @@ app.get('/', (req, res) => {
     const welcomeMessage = `
     Hello there!
 
-    Welcome to my Blog API. Here are some links you might find useful:
-    - Blog Path Test : https://ith-mybrand-backend.onrender.com/blogs/
-    - User Path Test : https://ith-mybrand-backend.onrender.com/users/    
-    - Blogs List in JSON format : https://ith-mybrand-backend.onrender.com/blog/
-    - Users List in JSON format : https://ith-mybrand-backend.onrender.com/user/
-    - Swagger Documentation : https://ith-mybrand-backend.onrender.com/api-docs/
-    - *****************************************************************************************
-    - ** My Brand Frontend can be Accessed here : https://ith-mybrand.netlify.app/index.html **
-    - *****************************************************************************************
-    Thank you for using my API!
+    Welcome to my Blog API. Here are some links you might find useful:,
+    - Blog Path Test : <a href="https://ith-mybrand-backend.onrender.com/blogs/"> Here.</a>,
+    - User Path Test : <a href="https://ith-mybrand-backend.onrender.com/users/"> Here.</a>,   
+    - Blogs List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/blog/"> Here.</a>,
+    - Users List in JSON format : <a href="https://ith-mybrand-backend.onrender.com/user/"> Here.</a>,
+    - Swagger Documentation : https://ith-mybrand-backend.onrender.com/api-docs/"> Here.</a>,
+    - **************************************************************************************************************,
+    - ** My Brand Frontend can be Accessed here : <a href="https://ith-mybrand.netlify.app/index.html"> Here.</a> **,
+    - **************************************************************************************************************,
+    Thank you for using my API!,
   `;
   res.send(welcomeMessage);
 })
