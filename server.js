@@ -227,7 +227,7 @@ app.post('/signup', async (req, res) => {
 await newUser.save();
 
 
-  res.body({ message: 'USer Signed UP Successfully!' });
+  //res.body({ message: 'USer Signed UP Successfully!' });
 
 
 });
