@@ -259,7 +259,7 @@ app.post('/signin', async (req, res) => {
     // Check if the user exists
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(401).json({ message: 'Email not found, Please Signup first!!' });
+      return res.status(401).json({ message: 'Email not found, Please Signup first' });
     }
   
     // Check if the password is correct
@@ -268,19 +268,24 @@ app.post('/signin', async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: 'Your password is not correct!!' });
     }
-    const accessToken = await signAccessToken(user.email, user.role)
-    if(user.role == "Admin"){
-       // res.status(200).json({message: 'Welcome Admin, Successfully Signed In!'});
-        //res.json({ message: 'Welcome Admin, Successfully Signed In!' });
-        res.send(accessToken)
-//        req.session['jwt_token'] = accessToken
-    }else{
-        
-      //  res.status(200).json({message: 'Welcome, Signed In Successfully!'});
-        res.send(accessToken)
-      //  req.session['jwt_token'] = accessToken
-       // res.json({ message: 'Welcome, Signed In Successfully!' });
-    }
+    const accessToken = await signAccessToken(user.email, user.role);
+    const accessToken_string = JSON.stringify(accessToken);
+if (user.role === "Admin") {
+    res.status(200).json({
+        userType: 'admin',
+        accessToken: (accessToken_string)
+    });
+} else {
+    res.status(200).json({
+        userType: 'user',
+        accessToken: accessToken_string
+    });
+}
+
+
+
+
+
    
 
 })
