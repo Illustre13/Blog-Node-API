@@ -122,3 +122,34 @@
  *         description: Querries Not Found
  */
 
+/**
+ *  @swagger
+ * /querries/{id}:
+ *  delete:
+ *    summary: Delete the querry with the specified id
+ *    tags: [User]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The ID of the querries you want to delete
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Querries'
+ *    responses:
+ *      200:
+ *        description: The Querries was deleted
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Querries'
+ *      500:
+ *        description: Querries delete Error
+ *      404:
+ *        description: Querries Not Available
+ */

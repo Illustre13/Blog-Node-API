@@ -3,6 +3,7 @@ const  mongoose = require('mongoose');
 const app = express()
 const Blog = require('./models/blogModel')
 const User = require('./models/userModel')
+const Querries = require('./models/querriesModel')
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const {validateSignup} = require('./joiValidator');
@@ -290,7 +291,58 @@ if (user.role === "Admin") {
 })
     //End of Signin Section
 
+/*Querries API*/ 
+//Saving querries data into the database
+app.post('/save_querries', async(req, res) => {
+    //console.log(req.body);
+    //res.send(req.body);
+    try{
+        const querries = await Querries.create(req.body);
+        res.status(200).json(querries);
+    }catch(error){
+            console.log(error.message);
+            res.status(500).json({message: error.message})
+        }
+})
 
+//Fetching querries data from the database
+app.get('/querries', async(req, res) =>{
+    
+    try{
+        const querries = await Querries.find({});
+        res.status(200).json(querries)
+    }catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+//Fetching user data by id from the database
+app.get('/querries/:id', async(req, res) =>{
+    try{
+        const {id} = req.params;
+        const querries = await Querries.findById(id);
+        res.status(200).json(querries)
+    }catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+//Deleting a user with specified ID
+app.delete('/querries/:id', async(req, res) => {
+    try{
+        const {id} = req.params;
+        const querries = await Querries.findByIdAndDelete(id);
+        if(!user){
+            return res.status(404).json({message: `Cannot find any a querries with ID ${id}`})
+        }
+        res.status(200).json(querries)
+    }catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+
+/**/ 
 
 /* End of the User route section*/
 
