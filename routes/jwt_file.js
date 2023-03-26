@@ -11,7 +11,7 @@ module.exports = {
             const options = {}
             JWT.sign(payload, secret, options, (err, token) => {
                 if(err) reject(err)
-                resolve({token: token})
+                resolve({token})
             })
         })
     },

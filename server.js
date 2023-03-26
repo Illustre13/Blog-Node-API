@@ -104,22 +104,30 @@ app.post('/create_blog', async(req, res) => {
 })
 
 //Updating a blog in database Using JSON
-app.put('/update_blog/:id', async(req, res) =>{
-    try{
-       
+app.put('/update_blog/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
         
-        const {id} = req.params;
+        // Verify the access token
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        const payload = await verifyAccessToken(token);
+        
+        // Update the blog
         const blog = await Blog.findByIdAndUpdate(id, req.body);
-        if(!blog){
-            return res.status(404).json({message: `Cannot Find the Blog with this id: ${id}`})
+        if (!blog) {
+            return res.status(404).json({ message: `Cannot Find the Blog with this id: ${id}` });
         }
         const updatedBlog = await Blog.findById(id);
         res.status(200).json(updatedBlog);
         
-    }catch(error){
-        res.status(500).json({message: error.message})
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-})
+});
 
 
 //Deleting a blog with specified ID
@@ -180,7 +188,6 @@ app.put('/update_user/:id', async(req, res) =>{
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.split(' ')[1]
         if (!token) return res.status(401).send({ error: 'Unauthorized, No Token Available' })
-        
         const payload = await verifyAccessToken(token)
         console.log(payload.role)
         if (payload.role !== 'Admin') return res.status(401).send({ error: 'Unauthorized, You do not have Privilege to do this task' })
@@ -262,8 +269,6 @@ app.post('/signin', async (req, res) => {
       return res.status(401).json({ message: 'Email not found, Please Signup first' });
     }
   
-    // Check if the password is correct
-     // Compare the password with the hashed password using bcrypt
      const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: 'Your password is not correct!!' });
@@ -281,12 +286,6 @@ if (user.role === "Admin") {
         accessToken: accessToken_string
     });
 }
-
-
-
-
-
-   
 
 })
     //End of Signin Section
