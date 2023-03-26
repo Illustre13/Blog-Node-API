@@ -127,7 +127,7 @@
  * /querries/{id}:
  *  delete:
  *    summary: Delete the querry with the specified id
- *    tags: [User]
+ *    tags: [Querries]
  *    parameters:
  *      - in: path
  *        name: id
