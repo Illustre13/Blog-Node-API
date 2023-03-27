@@ -93,8 +93,6 @@ app.get('/blog/:id', async(req, res) =>{
 })
 //Saving blog data into the database
 app.post('/create_blog', async(req, res) => {
-    //console.log(req.body);
-    //res.send(req.body);
     try{
         const blog = await Blog.create(req.body);
         res.status(200).json(blog);
@@ -109,13 +107,13 @@ app.put('/update_blog/:id', async (req, res) => {
     try {
         const { id } = req.params;
         
-        // Verify the access token
-        const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1];
-        if (!token) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
-        const payload = await verifyAccessToken(token);
+        // // Verify the access token
+        // const authHeader = req.headers['authorization'];
+        // const token = authHeader && authHeader.split(' ')[1];
+        // if (!token) {
+        //     return res.status(401).json({ message: 'Unauthorized' });
+        // }
+        // const payload = await verifyAccessToken(token);
         
         // Update the blog
         const blog = await Blog.findByIdAndUpdate(id, req.body);
