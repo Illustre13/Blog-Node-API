@@ -73,7 +73,7 @@ describe('Testing Blog End Points', () => {
 
    it('should return a 200 status code for deleting the blog successfully', (done) => {
     chai.request(baseUrl)
-      .delete('/delete_blog/641dc0486aeae2451ea69835')
+      .delete('/delete_blog/6419b1f74c8e78488252f409')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -143,9 +143,9 @@ describe('Testing User End Points', () => {
 
        it('should return a 200 status code for updating the user successfully', async() => {
         const res = await chai.request(baseUrl)
-           .put('/update_user/641d5df46bd30ba983b39f91')
+           .put('/update_user/64216b9545e134b728aedf7e')
            .send({
-             username: 'Bertin'
+             username: 'NewTestCaseUpdated'
            });
       
              expect(res).to.have.status(200);
@@ -154,7 +154,7 @@ describe('Testing User End Points', () => {
 
        it('should return a 200 status code for deleting the user successfully', (done) => {
         chai.request(baseUrl)
-          .delete('/delete_user/641b239b69a472a5136d6582')
+          .delete('/delete_user/64216b5045e134b728aedf70')
           .end((err, res) => {
             expect(res).to.have.status(200);
             done();
@@ -167,7 +167,7 @@ describe('Testing User End Points', () => {
            .post('/signup')
            .send({
                username: 'patrick',
-               email: 'patrick@gmail.com',
+               email: 'patrickM@gmail.com',
                password: 'patrick123',
                rePassword: 'patrick123',
                role: 'User'
