@@ -115,7 +115,7 @@ app.put('/update_blog/:id', async (req, res) => {
         // }
         // const payload = await verifyAccessToken(token);
         
-        // Update the blog
+        // Update the blog codes
         const blog = await Blog.findByIdAndUpdate(id, req.body);
         if (!blog) {
             return res.status(404).json({ message: `Cannot Find the Blog with this id: ${id}` });
@@ -135,7 +135,7 @@ app.delete('/delete_blog/:id', async(req, res) => {
         const {id} = req.params;
         const blog = await Blog.findByIdAndDelete(id);
         if(!blog){
-            return res.status(404).json({message: `Cannot find any a blog with ID ${id}`})
+            return res.status(404).json({message: `Cannot find Blog with ID ${id}`})
         }
         res.status(200).json(blog)
     }catch(error){

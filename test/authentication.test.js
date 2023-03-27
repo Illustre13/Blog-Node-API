@@ -36,7 +36,7 @@ describe('Testing Blog End Points', () => {
 
   it('should return a 200 status code for getting blog by id successfully', (done) => {
     chai.request(baseUrl)
-      .get('/blog/641077749a36a7b4ff669adc')
+      .get('/blog/6420a9354f718aadf2ea78bd')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -48,12 +48,11 @@ describe('Testing Blog End Points', () => {
     const res = await chai.request(baseUrl)
        .post('/create_blog')
        .send({
-         title: 'Jest Testing QWERTY',
-         category: 'Testing_QWERTY',
-           email: 'testuser_QWERTY@example.com',
+         title: 'Test Cases',
+         category: 'Programming',
+           email: 'testcases@gmail.com',
            image: 'https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-           content: 'Jest Testing QWERTY, Jest Testing, Jest Testing, Jest Testing, Jest Testing, ',
-           role: 'user'
+           content: 'Test Cases'
        });
   
          expect(res).to.have.status(200);
@@ -62,10 +61,10 @@ describe('Testing Blog End Points', () => {
 
    it('should return a 200 status code for updating the blog successfully', async() => {
     const res = await chai.request(baseUrl)
-       .put('/update_blog/640f3a976f08e7d7eb0e23ce')
+       .put('/update_blog/6420a9354f718aadf2ea78bd')
        .send({
-         title: 'Standup Updated_QWERTY',
-         content: 'Jest Testing Updated, Jest Testing Updated, Jest Testing Updated, Jest Testing Updated, Jest Testing Updated'
+         title: 'Gael Test Cases',
+         content: 'Gael Updated Test passed'
        });
   
          expect(res).to.have.status(200);
@@ -74,7 +73,7 @@ describe('Testing Blog End Points', () => {
 
    it('should return a 200 status code for deleting the blog successfully', (done) => {
     chai.request(baseUrl)
-      .delete('/delete_blog/641985617eeef1998fa9055d')
+      .delete('/delete_blog/641dc0486aeae2451ea69835')
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -118,9 +117,9 @@ describe('Testing User End Points', () => {
           });
       });
     
-      it('should return a 200 status code for getting blog by id successfully', (done) => {
+      it('should return a 200 status code for getting user by id successfully', (done) => {
         chai.request(baseUrl)
-          .get('/user/64132604cea21ef58d9558f9')
+          .get('/user/641dc0756aeae2451ea69842')
           .end((err, res) => {
             expect(res).to.have.status(200);
             done();
@@ -133,10 +132,10 @@ describe('Testing User End Points', () => {
         const res = await chai.request(baseUrl)
            .post('/save_user')
            .send({
-               username: 'testuser_QWERTY',
-               email: 'testuser_QWERTY@example.com',
-               password: 'testpassword',
-               rePassword: 'testpassword',
+               username: 'NewTestCase',
+               email: 'newTestCase@gmail.com',
+               password: 'testcase',
+               rePassword: 'testcase',
                role: 'User'
            });
              expect(res).to.have.status(200);  
@@ -144,9 +143,9 @@ describe('Testing User End Points', () => {
 
        it('should return a 200 status code for updating the user successfully', async() => {
         const res = await chai.request(baseUrl)
-           .put('/update_user/6419b0dee3210c933aef293e')
+           .put('/update_user/641d5df46bd30ba983b39f91')
            .send({
-             username: 'testuserUpdatedQWERTY'
+             username: 'Bertin'
            });
       
              expect(res).to.have.status(200);
@@ -155,7 +154,7 @@ describe('Testing User End Points', () => {
 
        it('should return a 200 status code for deleting the user successfully', (done) => {
         chai.request(baseUrl)
-          .delete('/delete_user/6419b1de2be834a659a0c948')
+          .delete('/delete_user/641b239b69a472a5136d6582')
           .end((err, res) => {
             expect(res).to.have.status(200);
             done();
@@ -167,10 +166,10 @@ describe('Testing User End Points', () => {
         const res = await chai.request(baseUrl)
            .post('/signup')
            .send({
-               username: 'signup001',
-               email: 'signup_001@example.com',
-               password: 'signup001',
-               rePassword: 'signup001',
+               username: 'patrick',
+               email: 'patrick@gmail.com',
+               password: 'patrick123',
+               rePassword: 'patrick123',
                role: 'User'
            });
              expect(res).to.have.status(200);  
@@ -191,10 +190,10 @@ describe('Testing User End Points', () => {
         const res = await chai.request(baseUrl)
            .post('/signup')
            .send({
-               username: 'testuser',
-               email: 'testuser@example.com',
-               password: 'testpassword',
-               rePassword: 'testpassword',
+               username: 'Alain',
+               email: 'alain@gmail.com',
+               password: 'alain123',
+               rePassword: 'alain123',
                role: 'User'
            });
              expect(res).to.have.status(409);  
