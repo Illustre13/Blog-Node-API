@@ -1,0 +1,22 @@
+name: My Backend CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Start server
+      run: npm run server
+      
+    - name: Run Tests
+      run: npm test
+      
